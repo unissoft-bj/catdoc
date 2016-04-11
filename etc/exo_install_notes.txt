@@ -1,0 +1,94 @@
+ From exoplatform forum:
+
+
+OS : Ubuntu 14.04.3 LTS Server
+Instaled software:
+SSH
+MongoDB 2.6.10
+java version "1.7.0_91"
+OpenJDK Runtime Environment (IcedTea 2.6.3) (7u91-2.6.3-0ubuntu0.14.04.1)
+OpenJDK 64-Bit Server VM (build 24.91-b01, mixed mode)
+eXo Platform v4.2.0 - build 20150630 Tomcat
+
+***** 1.Installation MongoDB *****
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+
+sudo apt-get update
+
+sudo apt-get install mongodb-org=2.6.10 mongodb-org-server=2.6.10 mongodb-org-shell=2.6.10 mongodb-org-mongos=2.6.10 mongodb-org-tools=2.6.10
+
+service mongod start
+
+***** 2.Configuration MongoDB *****
+
+$ mongo
+>use admin
+>db.createUser({user: "admin", pwd: "password", roles: [{role: "userAdminAnyDatabase", db: "admin"}]})
+>exit
+
+sudo nano /etc/mongod.conf
+
+bind_ip = 127.0.0.1
+port = 27017
+auth=true
+
+$ mongo -port 27017 -host 127.0.0.1 -u admin -p password -authenticationDatabase admin
+>use chat
+>db.createUser({user: "superuser", pwd: "password", roles: [{role: "readWrite", db: "chat"}]})
+>exit
+
+Vérifier la connexion à la DB:
+mongo -port 27017 -host 127.0.0.1 -u superuser -p password -authenticationDatabase chat
+
+***** 3. Installation ExoPlatform 4.2.0 Tomcat *****
+
+sudo apt-get update
+sudo apt-get install openjdk-7-jre-headless wget unzip zip mc -y
+
+cd /mnt
+sudo mkdir exo
+
+sudo wget http://downloads.sourceforge.net/project/exo/Platform4.2/eXo-Platform-community-tomcat-4.2.0.zip
+sudo unzip eXo-Platform-community-tomcat-4.2.0.zip
+sudo cp -r platform-community-4.2.0/* /mnt/exo
+sudo rm -r platform-community-4.2.0
+sudo rm eXo-Platform-community-tomcat-4.2.0.zip
+
+***** 4. Installation & configuration exo-chat-community:1.1.0 *****
+sudo ./addon install exo-chat-community:1.1.0
+sudo nano /mnt/exo/gatein/conf/chat.properties
+
+**chat.properties**
+dbServerType=mongo
+dbServerHost=localhost
+dbServerPort=27017
+dbName=chat
+dbAuthentication=true
+dbUser=superuser
+dbPassword=password
+chatServerBase=http://localhost:8080
+chatServerUrl=/chatServer
+chatPortalPage=/portal/intranet/chat
+chatIntervalNotif=3000
+chatIntervalChat=3000
+chatIntervalSession=60000
+chatIntervalStatus=15000
+chatIntervalUsers=5000
+chatPassPhrase=passphrase perso
+chatCronNotifCleanup=0 0/60 * * * ?
+publicMode=true
+publicAdminGroup=/platform/administrators
+
+teamAdminGroup=/platform/administrators
+
+
+***** 5. configuration exo.properties for mail, jodconverter and address exo *****
+sudo cp exo-sample.properties exo.properties
+sudo nano exo.properties
+
+***** 6. Installation Libreoffice *****
+sudo add-apt-repository ppa:libreoffice/ppa
+sudo apt-get update && sudo apt-get -y dist-upgrade
+sudo apt-get install libreoffice

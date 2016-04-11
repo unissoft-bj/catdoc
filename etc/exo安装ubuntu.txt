@@ -1,0 +1,166 @@
+================
+安装ubuntu
+================
+1，从ubuntu website下载iso
+ubuntuu-14.04.4-server-amd64.iso
+http://mirror.lzu.edu.cn/ubuntu-releases/14.04.4/ubuntu-14.04.4-server-amd64.iso
+
+2，用UltraISO软件烧录u盘，
+并复制ubuntu-14.04.4-server-amd64.iso到U盘根目录
+
+3，用U盘启动服务器，开始安装
+
+4，遇到cdrom mount不上时，返回安装菜单，进入shell执行
+
+#确定u盘的设备号,eg, /dev/sdb4
+ls /dev/sd*
+拔掉u盘，重新插上，确定设备号
+ls /dev/sd*
+this time, /dev/sdc4
+
+mkdir /iso
+mount /dev/sdc4 /iso
+mount /iso/ubuntu-14.04.4-server-amd64.iso /media/cdrom
+
+5，继续执行ubuntu的安装步骤
+安装时选择openssh server，或者安装后执行apt-get install openssh-server
+
+6，网卡参数
+root@exo-app-1:~# cat /etc/network/interfaces
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto em1
+#iface em1 inet dhcp
+iface em1 inet static
+    address 10.0.5.3
+    netmask 255.255.255.0
+    gateway 10.0.5.1
+    network 10.0.5.0
+    broadcast 10.5.5.255
+
+root@exo-app-1:~# 
+
+7，DNS参数
+root@exo-app-1:~# cat /etc/resolvconf/resolv.conf.d/base 
+nameserver 114.114.114.114
+nameserver 114.114.115.115
+root@exo-app-1:~# 
+
+8，sshd参数
+root@exo-app-1:~# nano /etc/ssh/sshd_config 
+
+# What ports, IPs and protocols we listen for
+Port 22
+Port 3389
+
+
+9，设置时区和时间
+root@exo-app-1:~# date -R
+Sun, 10 Apr 2016 00:13:43 +0000
+root@exo-app-1:~# tzselect
+
+Asia/Shanghai
+root@exo-app-1:~# 
+
+root@exo-app-1:~# date -R
+Sun, 10 Apr 2016 00:14:29 +0000
+
+root@exo-app-1:~# date -s '2016-4-10 8:15'
+Sun Apr 10 08:15:00 UTC 2016
+
+root@exo-app-1:~# date -R
+Sun, 10 Apr 2016 08:15:05 +0000
+
+10，更新源
+root@exo-app-1:~# cat /etc/apt/sources.list
+deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+root@exo-app-1:~# 
+
+==================
+安装mysql
+==================
+root@exo-app-1:~# apt-get install mysql-server mysql-client
+mysql root 0ffs4t? 
+
+允许远程访问mysql
+#bind-address = 127.0.0.1
+bind-address = 0.0.0.0 
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '0ffs4t?'; 
+mysql> FLUSH PRIVILEGES; 
+
+
+=================
+安装java
+=================
+
+http://www.linuxidc.com/Linux/2014-11/109216.htm
+jdk-8u74-linux-x64.gz
+
+root@exo-app-1:~# tar zvxf jdk-8u74-linux-x64.gz
+root@exo-app-1:~# mkdir /usr/lib/jvm
+root@exo-app-1:~# mv jdk1.8.0_74/ /usr/lib/jvm/
+
+root@exo-app-1:~# nano ~/.profile 
+
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_74
+export JRE_HOME=${JAVA_HOME}/jre                
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+
+root@exo-app-1:~# source ~/.profile 
+root@exo-app-1:~# env
+SHELL=/bin/bash
+TERM=vt100
+OLDPWD=/etc/apt
+JRE_HOME=/usr/lib/jvm/jdk1.8.0_74/jre
+
+root@exo-app-1:~# java -version
+java version "1.8.0_74"
+Java(TM) SE Runtime Environment (build 1.8.0_74-b02)
+Java HotSpot(TM) 64-Bit Server VM (build 25.74-b02, mixed mode)
+root@exo-app-1:~# 
+
+
+===================
+安装系统测试工具
+===================
+root@exo-app-1:~# apt-get install sysstat
+root@exo-app-1:~# cat /etc/default/sysstat 
+#
+# Default settings for /etc/init.d/sysstat, /etc/cron.d/sysstat
+# and /etc/cron.daily/sysstat files
+#
+
+# Should sadc collect system activity informations? Valid values
+# are "true" and "false". Please do not put other values, they
+# will be overwritten by debconf!
+ENABLED="true"
+
+root@exo-app-1:~# 
+
+root@exo-app-1:~# /etc/init.d/sysstat start
+ * Starting the system activity data collector sadc
+   ...done.
+root@exo-app-1:~# iostat -x -k
+
+root@exo-app-1:~# apt-get install hdparm
+root@exo-app-1:~# hdparm -Tt /dev/sda
+
+root@exo-app-1:~# apt-get install htop
+root@exo-app-1:~# htop
