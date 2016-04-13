@@ -1,0 +1,29 @@
+#!/bin/bash
+   
+### BEGIN INIT INFO
+# Provides:          tomcat
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start and stop Apache Tomcat
+# Description:       Enable Apache Tomcat service provided by daemon.
+### END INIT INFO
+   
+#!/bin/sh
+# eXo Platform Portal Server
+
+export eXoPlatform_HOME=/opt/platform-community-4.3.0
+  
+case "$1" in
+'start')
+$eXoPlatform_HOME/start_eXo.sh
+;;
+'stop')
+$eXoPlatform_HOME/stop_eXo.sh
+;;
+*)
+echo "Usage: $0 { start | stop }"
+;;
+esac
+exit 0
