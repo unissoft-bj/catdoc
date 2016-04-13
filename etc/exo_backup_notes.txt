@@ -1,0 +1,32 @@
+1. database backup:
+mysqldump -ujcr -pjcr_pw! plf_jcr > jcr_apr_14.sql
+mysqldump -uidm -pidm_pw! plf_idm > idm_apr_14.sql
+
+2. jcr data backup:
+Administrator@dysoft /cygdrive/d/opt/platform-community-4.3.0/gatein
+$ tar -zcvf data-apr-12.tar.gz data/
+
+3. cp the file to the exo installation machine.
+
+4. install eXo community version
+exo@exo-app-1:/opt/platform-community-4.3.0$ sudo unzip eXo-Platform-community-4.3.0.zip
+exo@exo-app-1:/opt/platform-community-4.3.0$ sudo chown exo:exo platform-community-4.3.0/ -R
+
+5. install addon 
+exo@exo-app-1:/opt/platform-community-4.3.0$ ./addon install exo-tasks
+
+6. in exo home dir, create git folder
+
+7. git clone https://github.com/unissoft-bj/catdoc.git in git folder
+
+8. create database and users
+exo@exo-app-1:~/git/catdoc/etc$ ./create_mysql_exo_db_user.sh
+
+9. cd git/catdoc/etc
+exo@exo-app-1:~/git/catdoc/etc/tomcat$ cp -r * /opt/platform-community-4.3.0/
+
+10. recover database
+exo@exo-app-1:~/exo-backup$ mysql -uidm -pidm_pw! plf_idm < idm_apr_14.sql
+exo@exo-app-1:~/exo-backup$ mysql -ujcr -pjcr_pw! plf_jcr < jcr_apr_14.sql
+
+11. recover data

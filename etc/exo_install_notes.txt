@@ -92,3 +92,10 @@ sudo nano exo.properties
 sudo add-apt-repository ppa:libreoffice/ppa
 sudo apt-get update && sudo apt-get -y dist-upgrade
 sudo apt-get install libreoffice
+
+## run as a service
+6)  run 'chmod +x /opt/platform-community-4.3.0/eXo' to have it executable.
+
+7)  run 'sudo ln -sf /opt/platform-community-4.3.0/eXo /etc/init.d/eXo
+
+8)  run 'update-rc.d eXo defaults' for wyun_svc run-level settings.
