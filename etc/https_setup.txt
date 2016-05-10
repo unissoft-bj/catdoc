@@ -1,0 +1,16 @@
+1. server key:
+
+keytool -genkey -keyalg RSA -keysize 2048 -keystore serverkey.jks -alias wyun -storepass 0ffs4t? -keypass 0ffs4t? -dname 'O=wyun,OU=wyun,L=Vienna,ST=VA,C=US,CN=wyun.net'
+
+2. import ssl cert into java truststore
+
+  a. export cert from server key
+    keytool -export -keystore serverkey.jks -alias wyun -file exo.crt
+  b. import the cert into java truststore
+    keytool -import -keystore $JAVA_HOME/jre/lib/security/cacerts -file exo.crt -alias wyun
+    ===========================================
+     sudo keytool -import -keystore $JAVA_HOME/jre/lib/security/cacerts -file ./exo.crt -alias wyun
+     Enter keystore password: changeit
+     
+    
+3. configuring tomcat (see exo enabling https for tomcat)
