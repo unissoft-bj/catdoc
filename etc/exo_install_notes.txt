@@ -1,101 +1,33 @@
- From exoplatform forum:
+0. run 'adduser --system --no-create-home --disabled-password --disabled-login --group exo' to add an user for exo.
+ 
+1. go to http://downloads.sourceforge.net/project/exo/Platform4.3/. download eXo-Platform-community-tomcat-4.3.0.zip
 
 
-OS : Ubuntu 14.04.3 LTS Server
-Instaled software:
-SSH
-MongoDB 2.6.10
-java version "1.7.0_91"
-OpenJDK Runtime Environment (IcedTea 2.6.3) (7u91-2.6.3-0ubuntu0.14.04.1)
-OpenJDK 64-Bit Server VM (build 24.91-b01, mixed mode)
-eXo Platform v4.2.0 - build 20150630 Tomcat
+2. install eXo community version
+exo@exo-app-1:/opt/platform-community-4.3.0$ sudo unzip eXo-Platform-community-4.3.0.zip
+exo@exo-app-1:/opt/platform-community-4.3.0$ sudo chown exo:exo platform-community-4.3.0/ -R
 
-***** 1.Installation MongoDB *****
+3. install exo-tasks addon 
+exo@exo-app-1:/opt/platform-community-4.3.0$ ./addon install exo-tasks
 
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+===============
+**Those configure files could be obtained from distribution disk
+===============
 
-sudo apt-get update
+4. in home dir, create git folder
 
-sudo apt-get install mongodb-org=2.6.10 mongodb-org-server=2.6.10 mongodb-org-shell=2.6.10 mongodb-org-mongos=2.6.10 mongodb-org-tools=2.6.10
+5. git clone https://github.com/unissoft-bj/catdoc.git in git folder
 
-service mongod start
+6. create database and users
+exo@exo-app-1:~/git/catdoc/etc$ ./create_mysql_exo_db_user.sh
 
-***** 2.Configuration MongoDB *****
-
-$ mongo
->use admin
->db.createUser({user: "admin", pwd: "password", roles: [{role: "userAdminAnyDatabase", db: "admin"}]})
->exit
-
-sudo nano /etc/mongod.conf
-
-bind_ip = 127.0.0.1
-port = 27017
-auth=true
-
-$ mongo -port 27017 -host 127.0.0.1 -u admin -p password -authenticationDatabase admin
->use chat
->db.createUser({user: "superuser", pwd: "password", roles: [{role: "readWrite", db: "chat"}]})
->exit
-
-Vérifier la connexion à la DB:
-mongo -port 27017 -host 127.0.0.1 -u superuser -p password -authenticationDatabase chat
-
-***** 3. Installation ExoPlatform 4.2.0 Tomcat *****
-
-sudo apt-get update
-sudo apt-get install openjdk-7-jre-headless wget unzip zip mc -y
-
-cd /mnt
-sudo mkdir exo
-
-sudo wget http://downloads.sourceforge.net/project/exo/Platform4.3/eXo-Platform-community-tomcat-4.3.0.zip
-sudo unzip eXo-Platform-community-tomcat-4.3.0.zip
-sudo cp -r platform-community-4.2.0/* /mnt/exo
-sudo rm -r platform-community-4.2.0
-sudo rm eXo-Platform-community-tomcat-4.2.0.zip
-
-***** 4. Installation & configuration exo-chat-community:1.1.0 *****
-sudo ./addon install exo-chat-community:1.1.0
-sudo nano /mnt/exo/gatein/conf/chat.properties
-
-**chat.properties**
-dbServerType=mongo
-dbServerHost=localhost
-dbServerPort=27017
-dbName=chat
-dbAuthentication=true
-dbUser=superuser
-dbPassword=password
-chatServerBase=http://localhost:8080
-chatServerUrl=/chatServer
-chatPortalPage=/portal/intranet/chat
-chatIntervalNotif=3000
-chatIntervalChat=3000
-chatIntervalSession=60000
-chatIntervalStatus=15000
-chatIntervalUsers=5000
-chatPassPhrase=passphrase perso
-chatCronNotifCleanup=0 0/60 * * * ?
-publicMode=true
-publicAdminGroup=/platform/administrators
-
-teamAdminGroup=/platform/administrators
+7. cd git/catdoc/etc
+exo@exo-app-1:~/git/catdoc/etc/tomcat$ cp -r * /opt/platform-community-4.3.0/
 
 
-***** 5. configuration exo.properties for mail, jodconverter and address exo *****
-sudo cp exo-sample.properties exo.properties
-sudo nano exo.properties
-
-***** 6. Installation Libreoffice *****
-sudo add-apt-repository ppa:libreoffice/ppa
-sudo apt-get update && sudo apt-get -y dist-upgrade
-sudo apt-get install libreoffice
-
-## run as a service
-6)  run 'chmod +x /opt/platform-community-4.3.0/eXo' to have it executable.
-
-7)  run 'sudo ln -sf /opt/platform-community-4.3.0/eXo /etc/init.d/eXo
-
-8)  run 'update-rc.d eXo defaults' for wyun_svc run-level settings.
+====================
+8. run exo as a service
+ ===================
+ a. run 'chmod +x /opt/platform-community-4.3.0/eXo' to have it executable.
+ b. run 'sudo ln -sf /opt/platform-community-4.3.0/eXo /etc/init.d/eXo
+ c. run 'update-rc.d eXo defaults' for eXo run-level settings.
