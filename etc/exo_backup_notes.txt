@@ -1,6 +1,6 @@
 1. database backup:
-mysqldump -ujcr -pjcr_pw! plf_jcr > jcr_apr_14.sql
-mysqldump -uidm -pidm_pw! plf_idm > idm_apr_14.sql
+mysqldump -ujcr -pjcr_pw! plf_jcr > jcr.sql
+mysqldump -uidm -pidm_pw! plf_idm > idm.sql
 
 2. jcr data backup:
 Administrator@dysoft /cygdrive/d/opt/platform-community-4.3.0/gatein
