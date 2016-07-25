@@ -50,8 +50,8 @@ sudo apt-get install openjdk-7-jre-headless wget unzip zip mc -y
 cd /mnt
 sudo mkdir exo
 
-sudo wget http://downloads.sourceforge.net/project/exo/Platform4.2/eXo-Platform-community-tomcat-4.2.0.zip
-sudo unzip eXo-Platform-community-tomcat-4.2.0.zip
+sudo wget http://downloads.sourceforge.net/project/exo/Platform4.3/eXo-Platform-community-tomcat-4.3.0.zip
+sudo unzip eXo-Platform-community-tomcat-4.3.0.zip
 sudo cp -r platform-community-4.2.0/* /mnt/exo
 sudo rm -r platform-community-4.2.0
 sudo rm eXo-Platform-community-tomcat-4.2.0.zip
