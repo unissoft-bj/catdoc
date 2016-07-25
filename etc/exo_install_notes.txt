@@ -28,6 +28,8 @@ exo@exo-app-1:~/git/catdoc/etc/tomcat$ cp -r * /opt/platform-community-4.3.0/
 ====================
 8. run exo as a service
  ===================
+ update the JAVA_HOME in eXo is correctly pointing to the right path
+ 
  a. run 'chmod +x /opt/platform-community-4.3.0/eXo' to have it executable.
  b. run 'sudo ln -sf /opt/platform-community-4.3.0/eXo /etc/init.d/eXo
  c. run 'update-rc.d eXo defaults' for eXo run-level settings.
