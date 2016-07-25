@@ -1,20 +1,20 @@
 ================
-°²×°ubuntu
+å®‰è£…ubuntu
 ================
-1£¬´Óubuntu websiteÏÂÔØiso
+1ï¼Œä»Žubuntu websiteä¸‹è½½iso
 ubuntuu-14.04.4-server-amd64.iso
 http://mirror.lzu.edu.cn/ubuntu-releases/14.04.4/ubuntu-14.04.4-server-amd64.iso
 
-2£¬ÓÃUltraISOÈí¼þÉÕÂ¼uÅÌ£¬
-²¢¸´ÖÆubuntu-14.04.4-server-amd64.isoµ½UÅÌ¸ùÄ¿Â¼
+2ï¼Œç”¨UltraISOè½¯ä»¶çƒ§å½•uç›˜ï¼Œ
+å¹¶å¤åˆ¶ubuntu-14.04.4-server-amd64.isoåˆ°Uç›˜æ ¹ç›®å½•
 
-3£¬ÓÃUÅÌÆô¶¯·þÎñÆ÷£¬¿ªÊ¼°²×°
+3ï¼Œç”¨Uç›˜å¯åŠ¨æœåŠ¡å™¨ï¼Œå¼€å§‹å®‰è£…
 
-4£¬Óöµ½cdrom mount²»ÉÏÊ±£¬·µ»Ø°²×°²Ëµ¥£¬½øÈëshellÖ´ÐÐ
+4ï¼Œé‡åˆ°cdrom mountä¸ä¸Šæ—¶ï¼Œè¿”å›žå®‰è£…èœå•ï¼Œè¿›å…¥shellæ‰§è¡Œ
 
-#È·¶¨uÅÌµÄÉè±¸ºÅ,eg, /dev/sdb4
+#ç¡®å®šuç›˜çš„è®¾å¤‡å·,eg, /dev/sdb4
 ls /dev/sd*
-°ÎµôuÅÌ£¬ÖØÐÂ²åÉÏ£¬È·¶¨Éè±¸ºÅ
+æ‹”æŽ‰uç›˜ï¼Œé‡æ–°æ’ä¸Šï¼Œç¡®å®šè®¾å¤‡å·
 ls /dev/sd*
 this time, /dev/sdc4
 
@@ -22,10 +22,10 @@ mkdir /iso
 mount /dev/sdc4 /iso
 mount /iso/ubuntu-14.04.4-server-amd64.iso /media/cdrom
 
-5£¬¼ÌÐøÖ´ÐÐubuntuµÄ°²×°²½Öè
-°²×°Ê±Ñ¡Ôñopenssh server£¬»òÕß°²×°ºóÖ´ÐÐapt-get install openssh-server
+5ï¼Œç»§ç»­æ‰§è¡Œubuntuçš„å®‰è£…æ­¥éª¤
+å®‰è£…æ—¶é€‰æ‹©openssh serverï¼Œæˆ–è€…å®‰è£…åŽæ‰§è¡Œapt-get install openssh-server
 
-6£¬Íø¿¨²ÎÊý
+6ï¼Œç½‘å¡å‚æ•°
 root@exo-app-1:~# cat /etc/network/interfaces
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
@@ -46,13 +46,13 @@ iface em1 inet static
 
 root@exo-app-1:~# 
 
-7£¬DNS²ÎÊý
+7ï¼ŒDNSå‚æ•°
 root@exo-app-1:~# cat /etc/resolvconf/resolv.conf.d/base 
 nameserver 114.114.114.114
 nameserver 114.114.115.115
 root@exo-app-1:~# 
 
-8£¬sshd²ÎÊý
+8ï¼Œsshdå‚æ•°
 root@exo-app-1:~# nano /etc/ssh/sshd_config 
 
 # What ports, IPs and protocols we listen for
@@ -60,7 +60,7 @@ Port 22
 Port 3389
 
 
-9£¬ÉèÖÃÊ±ÇøºÍÊ±¼ä
+9ï¼Œè®¾ç½®æ—¶åŒºå’Œæ—¶é—´
 root@exo-app-1:~# date -R
 Sun, 10 Apr 2016 00:13:43 +0000
 root@exo-app-1:~# tzselect
@@ -77,7 +77,7 @@ Sun Apr 10 08:15:00 UTC 2016
 root@exo-app-1:~# date -R
 Sun, 10 Apr 2016 08:15:05 +0000
 
-10£¬¸üÐÂÔ´
+10ï¼Œæ›´æ–°æº
 root@exo-app-1:~# cat /etc/apt/sources.list
 deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
@@ -92,12 +92,12 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted unive
 root@exo-app-1:~# 
 
 ==================
-°²×°mysql
+å®‰è£…mysql
 ==================
 root@exo-app-1:~# apt-get install mysql-server mysql-client
 mysql root 0ffs4t? 
 
-ÔÊÐíÔ¶³Ì·ÃÎÊmysql
+å…è®¸è¿œç¨‹è®¿é—®mysql
 #bind-address = 127.0.0.1
 bind-address = 0.0.0.0 
 
@@ -106,7 +106,7 @@ mysql> FLUSH PRIVILEGES;
 
 
 =================
-°²×°java
+å®‰è£…java
 =================
 
 http://www.linuxidc.com/Linux/2014-11/109216.htm
@@ -136,9 +136,13 @@ Java(TM) SE Runtime Environment (build 1.8.0_74-b02)
 Java HotSpot(TM) 64-Bit Server VM (build 25.74-b02, mixed mode)
 root@exo-app-1:~# 
 
+===================
+Install Libreoffice 
+===================
+sudo apt-get install libreoffice
 
 ===================
-°²×°ÏµÍ³²âÊÔ¹¤¾ß
+å®‰è£…ç³»ç»Ÿæµ‹è¯•å·¥å…·
 ===================
 root@exo-app-1:~# apt-get install sysstat
 root@exo-app-1:~# cat /etc/default/sysstat 
