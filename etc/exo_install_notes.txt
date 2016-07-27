@@ -1,4 +1,4 @@
-0. run 'adduser --system --no-create-home --disabled-password --disabled-login --group exo' to add an user for exo.
+0. run 'adduser --system --disabled-password --disabled-login --group exo' to add an user for exo.
  
 1. go to http://downloads.sourceforge.net/project/exo/Platform4.3/. download eXo-Platform-community-tomcat-4.3.0.zip
 
