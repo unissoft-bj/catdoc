@@ -7,23 +7,22 @@
 exo@exo-app-1:/opt/platform-community-4.3.0$ sudo unzip eXo-Platform-community-4.3.0.zip
 exo@exo-app-1:/opt/platform-community-4.3.0$ sudo chown exo:exo platform-community-4.3.0/ -R
 
-3. install exo-tasks addon 
-exo@exo-app-1:/opt/platform-community-4.3.0$ ./addon install exo-tasks
-
 ===============
 **Those configure files could be obtained from distribution disk
 ===============
 
-4. in home dir, create git folder
+3. in home dir, create git folder
 
-5. git clone https://github.com/unissoft-bj/catdoc.git in git folder
+4. git clone https://github.com/unissoft-bj/catdoc.git in git folder
 
-6. create database and users
+5. create database and users
 exo@exo-app-1:~/git/catdoc/etc$ ./create_mysql_exo_db_user.sh
 
-7. cd git/catdoc/etc
+6. cd git/catdoc/etc
 exo@exo-app-1:~/git/catdoc/etc/tomcat$ cp -r * /opt/platform-community-4.3.0/
 
+7. install exo-tasks addon 
+exo@exo-app-1:/opt/platform-community-4.3.0$ ./addon install exo-tasks
 
 ====================
 8. run exo as a service
