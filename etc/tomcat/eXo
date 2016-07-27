@@ -17,10 +17,12 @@ export eXoPlatform_HOME=/opt/platform-community-4.3.0
   
 case "$1" in
 'start')
-$eXoPlatform_HOME/start_eXo.sh --background
+echo "Starting eXo..."  
+sudo -u exo $eXoPlatform_HOME/start_eXo.sh --background
 ;;
 'stop')
-$eXoPlatform_HOME/stop_eXo.sh
+echo "Stopping eXo..."
+sudo -u exo $eXoPlatform_HOME/stop_eXo.sh
 ;;
 *)
 echo "Usage: $0 { start | stop }"
