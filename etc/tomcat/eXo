@@ -13,7 +13,7 @@
 #!/bin/sh
 # eXo Platform Portal Server
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_74
-export eXoPlatform_HOME=/opt/platform-community-4.3.0
+export eXoPlatform_HOME=/opt/platform-community-4.3.1-M11
   
 case "$1" in
 'start')
