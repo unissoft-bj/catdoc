@@ -32,3 +32,34 @@ exo@exo-app-1:/opt/platform-community-4.3.0$ ./addon install exo-tasks
  a. run 'chmod +x /opt/platform-community-4.3.0/eXo' to have it executable.
  b. run 'sudo ln -sf /opt/platform-community-4.3.0/eXo /etc/init.d/eXo
  c. run 'update-rc.d eXo defaults' for eXo run-level settings.
+ 
+ ==========================================================================================================
+ 07/30/2016 installation
+ ==========================================================================================================
+ 0. run 'adduser --system --disabled-password --disabled-login --group exo' to add an user for exo.
+ 
+
+5. create database and users
+exo@exo-app-1:~/git/catdoc/etc$ ./create_mysql_exo_db_user.sh
+
+**download eXo platform-community-4.3.0 from Baidu Cloud. extract it to /opt.
+
+6. cd git/catdoc/etc
+exo@exo-app-1:~/git/catdoc/etc/tomcat$ cp -r * /opt/platform-community-4.3.0/
+exo@exo-app-1:/opt$ sudo chown exo:exo /opt/platform-community-4.3.0 -R
+
+7. install exo-tasks addon 
+exo@exo-app-1:/opt/platform-community-4.3.0$ ./addon install exo-tasks
+
+====================
+8. run exo as a service
+ ===================
+ make sure the JAVA_HOME in eXo is correctly pointing to the right path
+ 
+ a. run 'chmod +x /opt/platform-community-4.3.0/eXo' to have it executable.
+ b. run 'sudo ln -sf /opt/platform-community-4.3.0/eXo /etc/init.d/eXo
+ c. run 'update-rc.d eXo defaults' for eXo run-level settings.
+ 
+ 9. start eXo
+ 
+ run 'sudo /etc/init.d/eXo start'
