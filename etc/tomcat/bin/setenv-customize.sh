@@ -57,7 +57,7 @@ EXO_JVM_SIZE_MAX="4g"
 EXO_JVM_USER_LANGUAGE="zh"
 
 # Default locale region
-#EXO_JVM_USER_REGION="FR"
+EXO_JVM_USER_REGION="CN"
 
 # Loads in-process debugging libraries to attach a debugger (true with --debug option on start_eXo.sh script)
 #EXO_DEBUG=true
