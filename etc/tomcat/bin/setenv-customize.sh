@@ -144,3 +144,6 @@ EXO_JVM_USER_REGION="CN"
 
 # IDE add-on (customize default ide add-on)
 #CATALINA_OPTS="${CATALINA_OPTS} -Dexo.ide.portalConfig.metadata.override=false"
+
+# file encoding UTF-8
+CATALINA_OPTS="${CATALINA_OPTS} -Dfile.encoding=UTF-8"

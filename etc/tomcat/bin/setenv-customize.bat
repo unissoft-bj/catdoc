@@ -40,7 +40,7 @@ REM # Home directory of the JVM to use (Default : try to auto-compute it from ex
 REM SET JAVA_HOME=C:\Program Files\Java\jdk6
 
 REM # Maximum Heap Size to use (Default : 3g)
-REM SET EXO_JVM_SIZE_MAX=4g
+SET EXO_JVM_SIZE_MAX=4g
 
 REM # Minimum Heap Size to use (Default : 512m)
 REM SET EXO_JVM_SIZE_MIN=512m
@@ -52,10 +52,10 @@ REM # Size of the Metaspace. (Default : 512m)
 REM SET EXO_JVM_METASPACE_SIZE_MAX=256m
 
 REM # Default locale language
-REM SET EXO_JVM_USER_LANGUAGE=fr
+SET EXO_JVM_USER_LANGUAGE=zh
 
 REM # Default locale region
-REM SET EXO_JVM_USER_REGION=FR
+SET EXO_JVM_USER_REGION=CN
 
 REM # Loads in-process debugging libraries to attach a debugger (also available with --debug option on start_eXo.bat script)
 REM SET EXO_DEBUG=true
@@ -138,3 +138,7 @@ REM SET "CATALINA_OPTS=%CATALINA_OPTS% -Dexo.acme.portalConfig.metadata.override
 
 REM # IDE add-on (customize default ide add-on data)
 REM SET "CATALINA_OPTS=%CATALINA_OPTS% -Dexo.ide.portalConfig.metadata.override=false"
+
+REM # file encoding
+SET "CATALINA_OPTS=%CATALINA_OPTS% -Dfile.encoding=UTF-8"
+
