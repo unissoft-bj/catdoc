@@ -1,6 +1,7 @@
 1. database backup:
 mysqldump -ujcr -pjcr_pw! plf_jcr > jcr.sql
 mysqldump -uidm -pidm_pw! plf_idm > idm.sql
+mysqldump -ujpa -pjpa_pw! plf_jpa > jpa.sql
 
 2. jcr data backup:
 Administrator@dysoft /cygdrive/d/opt/platform-community-4.3.0/gatein
@@ -26,7 +27,8 @@ exo@exo-app-1:~/git/catdoc/etc$ ./create_mysql_exo_db_user.sh
 exo@exo-app-1:~/git/catdoc/etc/tomcat$ cp -r * /opt/platform-community-4.3.0/
 
 10. recover database
-exo@exo-app-1:~/exo-backup$ mysql -uidm -pidm_pw! plf_idm < idm_apr_14.sql
-exo@exo-app-1:~/exo-backup$ mysql -ujcr -pjcr_pw! plf_jcr < jcr_apr_14.sql
+exo@exo-app-1:~/exo-backup$ mysql -uidm -pidm_pw! plf_idm < idm.sql
+exo@exo-app-1:~/exo-backup$ mysql -ujcr -pjcr_pw! plf_jcr < jcr.sql
+exo@exo-app-1:~/exo-backup$ mysql -ujpa -pjpa_pw! plf_jpa < jpa.sql
 
 11. recover data
